@@ -22,16 +22,34 @@
             x: data.offsetX,
             y: data.offsetY
           }
-          path = self.getPluginPath();
-          if (path) {
-          $.each(path.x, function(key, axisX) {
-            objAxis[axisX] = self.attr(axisX) + (data.offsetX - oldAxis.x);
-          })
-          $.each(path.y, function(key, axisY) {
-            objAxis[axisY] = self.attr(axisY) + (data.offsetY - oldAxis.y);
-          })
-          self.attr(objAxis);
-        }
+
+          var followChildrens = function(plugin) {
+            $.each(plugin.args.list, function(index, jGPlug) {
+              if (jGPlug.getPluginName() === "group") {
+                followChildrens(jGPlug);
+              } else {
+                moveAxis(jGPlug, jGPlug.getPluginPath());
+              }
+            });
+          }
+
+          var moveAxis = function(plugin, path) {
+            if (path) {
+              $.each(path.x, function(key, axisX) {
+                objAxis[axisX] = plugin.attr(axisX) + (data.offsetX - oldAxis.x);
+              })
+              $.each(path.y, function(key, axisY) {
+                objAxis[axisY] = plugin.attr(axisY) + (data.offsetY - oldAxis.y);
+              })
+              plugin.attr(objAxis);
+            }
+          }
+
+          if (self.getPluginName() === "group") {
+            followChildrens(self);
+          }else{
+            moveAxis(self, self.getPluginPath());
+          }
         }
       });
     }
