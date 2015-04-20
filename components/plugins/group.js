@@ -1,17 +1,27 @@
-// Circle plugin (based on Arc)
+// Group plugin (allows actions on multiple elements as a whole)
 $.jGraphics.registerPlugin({
   name: "group",
-  construct: function(args) {
+
+  construct: function (args) {
     this.list = args || [];
   },
-  render: function(self) {
-    var g = document.createElementNS("http://www.w3.org/2000/svg","g");
-    g.setAttribute("id", self.args.id);
+
+  // Display element instance
+  render: function (self) {
+    // Create SVG element where all childrens are placed
+    var group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+    // Add group identifier
+    group.setAttribute("id", self.args.id);
+
+    // We place all (existing) childrens in that element
     $.each(self.args.list, function(key, plugin){
       if ($.jGraphics.isInstance(plugin)) {
-        $("#"+plugin.id).appendTo(g);
+        $("#" + plugin.id).appendTo(group);
       }
     });
-    return g;
+
+    // Returning SGV element to display
+    return group;
   }
 })
