@@ -12,9 +12,6 @@ var jGraphics;
     // Internals plugin data
     var _internals = {};
 
-    // Global events
-    var _Events = {};
-
     // create a uniqId
     var _uniqId = function(prefix) {
         var rnd = (Math.random() * 1e9).toString(16).substr(0, 6) + (new Date().getTime()).toString(16);
@@ -138,18 +135,6 @@ var jGraphics;
         }
     };
 
-    /* -- Trigger -- */
-
-    $.jGraphics.trigger = function(eventName, data) {
-
-        var callback = _kernelEvents[eventName];
-
-        if ($.isFunction(callback)) {
-            // Execute callback using data
-            callback(data);
-        }
-    }
-
     /* -- Actions config -- */
 
     // Retrieve all actions
@@ -174,20 +159,6 @@ var jGraphics;
         if (action.name) {
             // Register action function
             jGPlugin.prototype[action.name] = action.fn;
-        }
-    }
-
-    /* -- Global Events  -- */
-
-    // Register an <event></event>
-    $.jGraphics.registerEvent = function(event) {
-        // Check wether the name has been set
-        if (event.name) {
-            // Register event function
-            _Events[event.name] = {
-                listener: event.listener,
-                fn: event.fn
-            }
         }
     }
 
