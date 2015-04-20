@@ -1,32 +1,31 @@
 // Register basic canvas elements with their respective args
-// @TODO: "path" is actually "position"
 var elements = [{
     name: "circle",
     args: [{cx:0}, {cy:0}, {r:5}],
-    path: {x: "cx", y: "cy"}
+    position: {x: "cx", y: "cy"}
   }, {
     name: "rect",
     args: [{x:0}, {y:0}, {width:100}, {height:100}],
-    path: {x: "x", y: "y"}
+    position: {x: "x", y: "y"}
   }, {
     name: "ellipse",
     args: [{cx:0}, {cy:0}, {rx:10}, {ry:10}],
-    path: {x: "cx", y: "cy"}
+    position: {x: "cx", y: "cy"}
   }, {
     name: "image",
     args: [{"xlink:href":"#"}, {x:0}, {y:10}],
-    path: {x: "x", y: "y"}
+    position: {x: "x", y: "y"}
   }, {
     name: "line",
     args: [{x1:0}, {y1:0}, {x2:10}, {y2:10}],
-    path: {x: ["x1", "x2"], y: ["y1", "y2"]}
+    position: {x: ["x1", "x2"], y: ["y1", "y2"]}
   }];
 
 // Register each element through a plugin
 $.each(elements, function(index, element) {
   $.jGraphics.registerPlugin({
     name: element.name,
-    path: element.path,
+    position: element.position,
 
     // How to construct future plugin instance
     construct: function (args) {

@@ -32,7 +32,7 @@ var jGraphics;
     }
 
     // Create state "object" for plugin
-    var jGPlugin = function(id, args, pluginName, pluginPath, svgId) {
+    var jGPlugin = function(id, args, pluginName, pluginPosition, svgId) {
 
         this.id = id;
         this.args = $.extend({}, args, {
@@ -46,12 +46,12 @@ var jGraphics;
         }
 
         // Get plugin Name
-        this.getPluginPath = function() {
-            if (pluginPath) {
-                pluginPath.x = $.makeArray(pluginPath.x);
-                pluginPath.y = $.makeArray(pluginPath.y);
+        this.getPluginPosition = function() {
+            if (pluginPosition) {
+                pluginPosition.x = $.makeArray(pluginPosition.x);
+                pluginPosition.y = $.makeArray(pluginPosition.y);
             }
-            return pluginPath;
+            return pluginPosition;
         }
 
         // Set internal values
@@ -182,7 +182,7 @@ var jGraphics;
     $.jGraphics.registerPlugin = function(plugin) {
 
         var pName = plugin.name,
-            pPath = plugin.path;
+            pPosition = plugin.position;
 
         // Check wether the name has been set
         if (!pName) {
@@ -195,7 +195,7 @@ var jGraphics;
             var id = _uniqId("jGPlugin_"),
                 svgId = this.id,
                 args = $.isFunction(plugin.construct) ? Object.create(new plugin.construct(arguments)) : {},
-                _state = new jGPlugin(id, args, pName, pPath, svgId);
+                _state = new jGPlugin(id, args, pName, pPosition, svgId);
 
             $("#" + svgId).append(plugin.render(_state));
 
