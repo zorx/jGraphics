@@ -7,8 +7,8 @@
       var axis = null;
       this.on('pointerdown', function(data) {
         axis = {
-          x: data.offsetX,
-          y: data.offsetY
+          x: data.pageX,
+          y: data.pageY
         };
       });
       this.on('pointerup', function(data) {
@@ -19,11 +19,11 @@
           var objAxis = {};
           var oldAxis = axis;
           axis = {
-            x: data.offsetX,
-            y: data.offsetY
+            x: data.pageX,
+            y: data.pageY
           }
 
-          var followChildrens = function(plugin) {
+          var followChildren = function(plugin) {
             $.each(plugin.args.list, function(index, jGPlug) {
               if (jGPlug.getPluginName() === "group") {
                 followChildrens(jGPlug);
@@ -36,17 +36,17 @@
           var moveAxis = function(plugin, path) {
             if (path) {
               $.each(path.x, function(key, axisX) {
-                objAxis[axisX] = plugin.attr(axisX) + (data.offsetX - oldAxis.x);
+                objAxis[axisX] = plugin.attr(axisX) + (data.pageX - oldAxis.x);
               })
               $.each(path.y, function(key, axisY) {
-                objAxis[axisY] = plugin.attr(axisY) + (data.offsetY - oldAxis.y);
+                objAxis[axisY] = plugin.attr(axisY) + (data.pageY - oldAxis.y);
               })
               plugin.attr(objAxis);
             }
           }
 
           if (self.getPluginName() === "group") {
-            followChildrens(self);
+            followChildren(self);
           }else{
             moveAxis(self, self.getPluginPath());
           }
