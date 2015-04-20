@@ -1,33 +1,8 @@
-## Branches
+# Contributing
 
-our branches have to be based on `Topic Branches`
+Branches follow a `Topic Branches` convention.
 
-http://git-scm.com/book/be/v2/Git-Branching-Branching-Workflows#Topic-Branches
-
-### Example : 
-feature/add-gulp
-
-fix/..
-
-
-
-## Commit Message Format
-Each commit message consists of a **header**, a **body** and a **footer**.  The header has a special
-format that includes a **type**, a **scope** and a **subject**:
-
-```
-<type>(<scope>): <subject>
-<BLANK LINE>
-<body>
-<BLANK LINE>
-<footer>
-```
-
-Any line of the commit message cannot be longer 100 characters! This allows the message to be easier
-to read on github as well as in various git tools.
-
-### Type
-Must be one of the following:
+## Types
 
 * **feat**: A new feature
 * **fix**: A bug fix
@@ -40,4 +15,27 @@ Must be one of the following:
 * **chore**: Changes to the build process or auxiliary tools and libraries such as documentation
   generation
 
-source : https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md
+Examples : `feature/add-gulp`, `fix/issue-9732`, `refactor/kernel`
+
+## Commit Message Format
+
+Each commit message consists of a **header**, a **body** and a **footer**.  The header has a special
+format that includes a **type**, a **scope** and a **subject**:
+
+```
+<type>(<scope>): <subject>
+<BLANK LINE>
+[<body>]
+<BLANK LINE>
+[<footer>]
+```
+
+Example : `fix(issue-14): plugins order fixed` (no body/footer)
+
+Any line of the commit message cannot be longer 100 characters! This allows the message to be easier
+to read on github as well as in various git tools.
+
+## Sources
+
+- http://git-scm.com/book/be/v2/Git-Branching-Branching-Workflows#Topic-Branches
+- https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md
