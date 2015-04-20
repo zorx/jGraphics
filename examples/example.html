@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jGraphics example</title>
+	<script src="../lib/jquery-1.11.1.min.js"></script>
+	<script src="../lib/hand.min.js"></script>
+	<script src="../src/jGraphics.js"></script>
+	<script src="../components/actions/draggable.js"></script>
+	<script src="../components/plugins/basic.js"></script>
+	<script src="../components/plugins/group.js"></script>
+
+	<script type="text/javascript"><!--
+	$(function() {
+		var jG = new jGraphics("#graphics");
+
+		// Add circle to canvas
+		var head = jG.circle(235,200,20);
+
+		var jad = jG.rect(250,300,20, 50);
+		var jag = jG.rect(200,300,20, 50);
+
+		var mag = jG.rect(170,225,20, 50);
+		var mad = jG.rect(280,225,20, 50);
+
+		var v = jG.rect(200,225,70, 70);
+
+
+		var line = jG.line(300,300,200, 200).attr( {stroke:"black", "stroke-width":"2"});
+
+		head.attr({stroke:"red", fill:"green"});
+		var group = jG.group(head, jad,jag);
+		group.attr({stroke:"red", fill:"green"});
+		group.draggable();
+
+
+	});
+	--></script>
+	<style type="text/css">
+		html, body {
+			background-color: #eee;
+		}
+	</style>
+</head>
+<body>
+	<div id="graphics"></div>
+</body>
+</html>
+
+
+
+
+
