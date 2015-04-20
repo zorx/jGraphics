@@ -28,17 +28,17 @@
               if (jGPlug.getPluginName() === "group") {
                 followChildrens(jGPlug);
               } else {
-                moveAxis(jGPlug, jGPlug.getPluginPath());
+                moveAxis(jGPlug, jGPlug.getPluginPosition());
               }
             });
           }
 
-          var moveAxis = function(plugin, path) {
-            if (path) {
-              $.each(path.x, function(key, axisX) {
+          var moveAxis = function(plugin, position) {
+            if (position) {
+              $.each(position.x, function(key, axisX) {
                 objAxis[axisX] = plugin.attr(axisX) + (data.pageX - oldAxis.x);
               })
-              $.each(path.y, function(key, axisY) {
+              $.each(position.y, function(key, axisY) {
                 objAxis[axisY] = plugin.attr(axisY) + (data.pageY - oldAxis.y);
               })
               plugin.attr(objAxis);
@@ -48,7 +48,7 @@
           if (self.getPluginName() === "group") {
             followChildren(self);
           }else{
-            moveAxis(self, self.getPluginPath());
+            moveAxis(self, self.getPluginPosition());
           }
         }
       });
