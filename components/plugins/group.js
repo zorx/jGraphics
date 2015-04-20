@@ -21,6 +21,7 @@ $.jGraphics.registerPlugin({
       }
     });
 
+    // Returning SGV element to display
     return group;
   }
 })
