@@ -31,6 +31,7 @@
 		var group = jG.group(head, jad,jag);
 		group.attr({stroke:"red", fill:"green"});
 		group.draggable();
+		head.animate({cx: 500})
 
 
 	});
@@ -39,14 +40,13 @@
 		html, body {
 			background-color: #eee;
 		}
+		#graphics {
+		  width: 500px;
+		  height: 500px;
+		}
 	</style>
 </head>
 <body>
 	<div id="graphics"></div>
 </body>
 </html>
-
-
-
-
-
