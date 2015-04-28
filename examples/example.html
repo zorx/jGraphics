@@ -14,6 +14,9 @@
 		// Let's start
 		var jG = new jGraphics("#graphics");
 
+		// Components have attributes you can play with
+		var stick = jG.line(300,300,200, 200).attr({stroke: "black", "stroke-width": "5"});
+
 		var head = jG.circle(235, 200, 20);
 		var body = jG.rect(200,225,70, 70);
 
@@ -21,9 +24,6 @@
 		var rightLeg = jG.rect(250, 300, 20, 50);
 		var leftArm  = jG.rect(170, 225, 20, 50);
 		var rightArm = jG.rect(280, 225, 20, 50);
-
-		// Components have attributes you can play with
-		var stick = jG.line(300,300,200, 200).attr({stroke: "black", "stroke-width": "5"});
 
 		// You also have group attributes and behavior
 		var group = jG.group(head, leftLeg, rightLeg).attr({stroke: "red", fill: "green"});
@@ -33,12 +33,12 @@
 
 		// Components actions
 		group.draggable();
-		body.on("pointerenter", function () {
+		body.on("pointerenter", function (self) {
 			// @TODO: using "this" would be nicer
-			body.attr({fill: "blue"});
+			self.attr({fill: "blue"});
 		});
-		body.on("pointerleave", function () {
-			body.attr({fill: "black"});
+		body.on("pointerleave", function (self) {
+			self.attr({fill: "black"});
 		});
 
 		// Animations
