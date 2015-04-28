@@ -5,13 +5,13 @@
     fn: function() {
       var self = this;
       var axis = null;
-      this.on('pointerdown', function(data) {
+      this.on('pointerdown', function(self, data) {
         axis = {
           x: data.pageX,
           y: data.pageY
         };
       });
-      this.on('pointerup', function(data) {
+      this.on('pointerup', function(self, data) {
         axis = null;
       });
       $(document).on('pointermove', function(data) {
