@@ -104,7 +104,12 @@ var jGraphics;
         }
 
         this.hide = function(callback) {
-            $("#" + id).hide(callback);
+            var next = $.isFunction(callback) ? callback : function() {};
+            var self = this;
+            $("#" + id).hide(function() {
+                [].unshift.call(arguments, self);
+                next.apply(this, arguments);
+            });
         }
 
         this.show = function() {
@@ -112,7 +117,12 @@ var jGraphics;
         }
 
         this.on = function(eventName, callback) {
-            $(document).on(eventName, "#" + id, callback);
+            var next = $.isFunction(callback) ? callback : function() {};
+            var self = this;
+            $(document).on(eventName, "#" + id, function() {
+                [].unshift.call(arguments, self);
+                next.apply(this, arguments);
+            });
         }
 
         // Trigger
