@@ -11,29 +11,38 @@
 
 	<script type="text/javascript"><!--
 	$(function() {
+		// Let's start
 		var jG = new jGraphics("#graphics");
 
-		// Add circle to canvas
-		var head = jG.circle(235,200,20);
+		var head = jG.circle(235, 200, 20);
+		var body = jG.rect(200,225,70, 70);
 
-		var jad = jG.rect(250,300,20, 50);
-		var jag = jG.rect(200,300,20, 50);
+		var leftLeg  = jG.rect(200, 300, 20, 50);
+		var rightLeg = jG.rect(250, 300, 20, 50);
+		var leftArm  = jG.rect(170, 225, 20, 50);
+		var rightArm = jG.rect(280, 225, 20, 50);
 
-		var mag = jG.rect(170,225,20, 50);
-		var mad = jG.rect(280,225,20, 50);
+		// Components have attributes you can play with
+		var stick = jG.line(300,300,200, 200).attr({stroke: "black", "stroke-width": "5"});
 
-		var v = jG.rect(200,225,70, 70);
+		// You also have group attributes and behavior
+		var group = jG.group(head, leftLeg, rightLeg).attr({stroke: "red", fill: "green"});
 
+		// Override groupe settings (inline attributes)
+		head.attr({stroke:"red", fill:"red"});
 
-		var line = jG.line(300,300,200, 200).attr( {stroke:"black", "stroke-width":"2"});
-
-		head.attr({stroke:"red", fill:"green"});
-		var group = jG.group(head, jad,jag);
-		group.attr({stroke:"red", fill:"green"});
+		// Components actions
 		group.draggable();
-		head.animate({cx: 500})
+		body.on("pointerenter", function () {
+			// @TODO: using "this" would be nicer
+			body.attr({fill: "blue"});
+		});
+		body.on("pointerleave", function () {
+			body.attr({fill: "black"});
+		});
 
-
+		// Animations
+		head.animate({cx: 500});
 	});
 	--></script>
 	<style type="text/css">
@@ -41,8 +50,10 @@
 			background-color: #eee;
 		}
 		#graphics {
-		  width: 500px;
-		  height: 500px;
+			width: 500px;
+			height: 500px;
+			margin: 20px auto;
+			border: 1px solid #ccc;
 		}
 	</style>
 </head>
